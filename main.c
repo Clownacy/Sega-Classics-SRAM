@@ -4,12 +4,6 @@
 #include <stdio.h>
 #include <windows.h>
 
-#ifdef __x86_64__
-#define ORIG_DLL_PATH "SEGAGameRoom_Data/Plugins/GenesisEmuWrapper64Original.dll"
-#else
-#define ORIG_DLL_PATH "SEGAGameRoom_Data/Plugins/GenesisEmuWrapperOriginal.dll"
-#endif
-
 int (*GetAudioFrame_orig)(float *var1, int var2);
 int (*GetAverageColor_orig)(void);
 void* (*GetRomState_orig)(void *var1);
@@ -34,7 +28,7 @@ void LoadOriginalDLL(void)
 			
 	if (original_dll == NULL)
 	{
-		original_dll = LoadLibrary(ORIG_DLL_PATH);
+		original_dll = LoadLibrary("SEGAGameRoom_Data/Plugins/GenesisEmuWrapperOriginal.dll");
 
 		GetAudioFrame_orig = (int(*)(float *var1, int var2))GetProcAddress(original_dll, "GetAudioFrame");
 		GetAverageColor_orig = (int(*)(void))GetProcAddress(original_dll, "GetAverageColor");
